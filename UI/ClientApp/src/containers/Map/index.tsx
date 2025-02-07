@@ -39,8 +39,7 @@ export default function MapContainer() {
                     features: [...collection.features, ...d.features]
                 })
                 page.current++;
-                setLoading(false);
-            });
+            }).finally(() => setLoading(false));
     };
 
     const reset = () => {
@@ -48,10 +47,7 @@ export default function MapContainer() {
         setCollection(defaultResults);
     }
 
-    useEffect(function resetOnCriteriaChange() {
-        reset();
-        console.log(1);
-    }, [startDate, endDate]);
+    useEffect(reset, [startDate, endDate]);
 
     return <main>
         <Form>
