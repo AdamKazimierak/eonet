@@ -4,7 +4,6 @@ using Eonet.Contracts.Features;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -39,31 +38,7 @@ namespace Eonet.Api.Controllers
             var features = await _dispatcher.Send(new GetFeaturesQuery(startUtc, endUtc, page));
             return Ok(new Models.FeatureCollection
             {
-                Features = features.Select(f => new Models.Feature
-                {
-                    Type = f.Type,
-                    Geometry = new Models.Geometry
-                    {
-                        Type = f.GeometryType,
-                        Coordinates = new List<double>
-                        {
-                            f.Longitude,
-                            f.Latitude
-                        }
-                    },
-                    Properties = new Models.Property
-                    {
-                        Category = new Models.Category
-                        {
-                            Id = f.CategroyId,
-                            Title = f.CategoryTitle
-                        },
-                        Date = f.PropertyDateUtc,
-                        Description = f.PropertyDescription,
-                        Id = f.PropertyId,
-                        Title = f.PropertyTitle
-                    }
-                })
+                Features = features.Select(GetFeaturesQueryResultMapper.ToFeatureModel)
             });
         }
     }
