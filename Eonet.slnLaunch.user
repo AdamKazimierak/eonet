@@ -1,0 +1,19 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "Api\\Eonet.Api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Service\\Eonet.Service.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "UI\\Eonet.UI.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
